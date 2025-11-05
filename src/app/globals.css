@@ -2,7 +2,31 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #1C1917;
+
+  /* Colombian Flag Colors - Refined */
+  --colombia-yellow-50: #FFFBEB;
+  --colombia-yellow-100: #FEF3C7;
+  --colombia-yellow-400: #FBBF24;
+  --colombia-yellow-500: #F59E0B;
+  --colombia-yellow-600: #D97706;
+
+  --colombia-blue-50: #EFF6FF;
+  --colombia-blue-500: #3B82F6;
+  --colombia-blue-600: #2563EB;
+  --colombia-blue-700: #1D4ED8;
+
+  --colombia-red-50: #FEF2F2;
+  --colombia-red-500: #EF4444;
+  --colombia-red-600: #DC2626;
+
+  /* Warm Grays */
+  --warm-gray-50: #FAFAF9;
+  --warm-gray-100: #F5F5F4;
+  --warm-gray-200: #E7E5E4;
+  --warm-gray-600: #57534E;
+  --warm-gray-700: #44403C;
+  --warm-gray-900: #1C1917;
 }
 
 @theme inline {
@@ -10,17 +34,100 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Custom Colombian colors */
+  --color-colombia-yellow-50: var(--colombia-yellow-50);
+  --color-colombia-yellow-100: var(--colombia-yellow-100);
+  --color-colombia-yellow-400: var(--colombia-yellow-400);
+  --color-colombia-yellow-500: var(--colombia-yellow-500);
+  --color-colombia-yellow-600: var(--colombia-yellow-600);
+
+  --color-colombia-blue-50: var(--colombia-blue-50);
+  --color-colombia-blue-500: var(--colombia-blue-500);
+  --color-colombia-blue-600: var(--colombia-blue-600);
+  --color-colombia-blue-700: var(--colombia-blue-700);
+
+  --color-colombia-red-50: var(--colombia-red-50);
+  --color-colombia-red-500: var(--colombia-red-500);
+  --color-colombia-red-600: var(--colombia-red-600);
+
+  --color-warm-gray-50: var(--warm-gray-50);
+  --color-warm-gray-100: var(--warm-gray-100);
+  --color-warm-gray-200: var(--warm-gray-200);
+  --color-warm-gray-600: var(--warm-gray-600);
+  --color-warm-gray-700: var(--warm-gray-700);
+  --color-warm-gray-900: var(--warm-gray-900);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Subtle texture overlay for depth */
+.texture-overlay {
+  position: relative;
+}
+
+.texture-overlay::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.02' /%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--warm-gray-100);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--colombia-yellow-400);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--colombia-yellow-500);
+}
+
+/* Focus visible styles for better keyboard navigation */
+*:focus-visible {
+  outline: 2px solid var(--colombia-yellow-400);
+  outline-offset: 2px;
+}
+
+/* Improved text rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
 }
