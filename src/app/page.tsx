@@ -112,6 +112,8 @@ export default function Home() {
     setMessage('');
 
     try {
+      // No timeout specified - will wait indefinitely for the response
+      // The backend has a 5-minute maxDuration configured
       const response = await fetch('/api/generate-narrative', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -121,6 +123,7 @@ export default function Home() {
           city: formData.ciudad,
           neighborhood: formData.barrio,
         }),
+        // Important: No signal/timeout configured to allow long-running AI operations
       });
 
       const data = await response.json();

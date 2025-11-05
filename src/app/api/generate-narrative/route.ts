@@ -22,6 +22,11 @@ interface UserInfo {
  * Expected latency: 5-10 seconds
  */
 
+// Route segment config - extend timeout for long-running AI operations
+// In production (Vercel), this allows up to 300 seconds for Hobby/Pro plans
+export const maxDuration = 300; // 5 minutes
+export const dynamic = 'force-dynamic'; // Disable static optimization
+
 // Define the agents following the deterministic pattern
 
 // Agent 1: Research the city and neighborhood
