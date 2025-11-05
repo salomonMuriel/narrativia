@@ -10,11 +10,26 @@ interface UserInfo {
   neighborhood: string;
 }
 
+/**
+ * Multi-Agent System for Personalized Narrative Generation
+ *
+ * Model Selection Strategy (Option A - Balanced):
+ * - Research agents: gpt-4.1-mini (1M context, factual accuracy, affordable)
+ * - Validation: gpt-4o-mini (100% JSON schema accuracy, proven)
+ * - Narrative: gpt-4o (warmth and emotional connection for storytelling)
+ *
+ * Total cost per request: ~$0.028 (3 cents)
+ * Expected latency: 5-10 seconds
+ */
+
 // Define the agents following the deterministic pattern
 
 // Agent 1: Research the city and neighborhood
+// Model: gpt-4.1-mini - Best for factual research with 1M context window
+// Cost: $0.40 input / $1.60 output per 1M tokens (~$0.003 per request)
 const researchAgent = new Agent({
   name: 'research_agent',
+  model: 'gpt-4.1-mini',
   instructions: `Eres un investigador experto en Colombia que busca información sobre ciudades y barrios.
 
 Tu tarea es investigar y proporcionar información detallada sobre una ciudad y barrio específico de Colombia.
@@ -32,8 +47,11 @@ IMPORTANTE: Enfócate en detalles concretos y específicos que permitan crear hi
 });
 
 // Agent 2: Research socioeconomic profile
+// Model: gpt-4.1-mini - Same as research agent for consistency
+// Cost: $0.40 input / $1.60 output per 1M tokens (~$0.002 per request)
 const socioeconomicAgent = new Agent({
   name: 'socioeconomic_agent',
+  model: 'gpt-4.1-mini',
   instructions: `Eres un analista socioeconómico experto en Colombia que investiga el perfil económico y social de barrios y comunidades.
 
 Tu tarea es investigar y proporcionar información sobre el nivel socioeconómico típico de un barrio específico en Colombia.
@@ -56,8 +74,11 @@ IMPORTANTE:
 });
 
 // Agent 3: Validate the research quality
+// Model: gpt-4o-mini - 100% proven JSON schema accuracy for structured output
+// Cost: $0.15 input / $0.60 output per 1M tokens (~$0.0004 per request)
 const researchValidatorAgent = new Agent({
   name: 'research_validator_agent',
+  model: 'gpt-4o-mini',
   instructions: `Evalúa la calidad de la investigación sobre una ciudad y barrio colombiano.
 
 Determina si:
@@ -75,8 +96,11 @@ Responde con tu evaluación estructurada.`,
 });
 
 // Agent 4: Generate the personalized narrative
+// Model: gpt-4o - Best for creative warmth and emotional connection in storytelling
+// Cost: $2.50 input / $10.00 output per 1M tokens (~$0.023 per request)
 const narrativeAgent = new Agent({
   name: 'narrative_agent',
+  model: 'gpt-4o',
   instructions: `Eres un escritor experto en narrativas inspiradoras sobre Colombia y el movimiento "Colombia es Buena".
 
 Tu tarea es crear una narrativa personalizada escrita en el futuro (año 2028) sobre cómo el movimiento "Colombia es buena y vale la pena cuidarla" transformó la vida en una ciudad y barrio específico de Colombia.
